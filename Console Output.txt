@@ -37,7 +37,8 @@ Backup completed to D:\Backups\ImportantData_20250417_102456
 [Pipeline] bat
 
 C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto>powershell -ExecutionPolicy Bypass -File C:\WinAdminAuto\ScheduleRestart.ps1 
-ERROR: No mapping between account names and security IDs was done.
+ERROR: No mapping between account names and security IDs was done.
+
 (40,4):UserId:System will restart at 10:29
 [Pipeline] }
 [Pipeline] // stage
