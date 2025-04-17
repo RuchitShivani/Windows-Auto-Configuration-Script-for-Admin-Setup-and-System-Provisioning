@@ -1,0 +1,63 @@
+Started by user Ruchit Shivani
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Create Local User)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto>powershell -ExecutionPolicy Bypass -File C:\WinAdminAuto\CreateUser.ps1 
+
+Name     Enabled Description       
+----     ------- -----------       
+testuser True    Created by Jenkins
+User testuser created and added to Administrators
+
+
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Backup Files)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto>powershell -ExecutionPolicy Bypass -File C:\WinAdminAuto\BackupFiles.ps1 
+Copy-Item : Cannot find drive. A drive with the name 'D' does not exist.
+At C:\WinAdminAuto\BackupFiles.ps1:4 char:1
++ Copy-Item -Path $Source -Destination $Destination -Recurse
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:String) [Copy-Item], DriveNotFoundException
+    + FullyQualifiedErrorId : DriveNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+Backup completed to D:\Backups\ImportantData_20250417_102456
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Schedule Restart)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto>powershell -ExecutionPolicy Bypass -File C:\WinAdminAuto\ScheduleRestart.ps1 
+ERROR: No mapping between account names and security IDs was done.
+(40,4):UserId:System will restart at 10:29
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Send Email Report)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\win-admin-auto>powershell -ExecutionPolicy Bypass -File C:\WinAdminAuto\EmailReport.ps1 
+Send-MailMessage : The SMTP server requires a secure connection or the client was not authenticated. The server 
+response was: 5.7.0 Authentication Required. For more information, go to
+At C:\WinAdminAuto\EmailReport.ps1:11 char:1
++ Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $Subject -Bod ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.Mail.SmtpClient:SmtpClient) [Send-MailMessage], SmtpExcept 
+   ion
+    + FullyQualifiedErrorId : SmtpException,Microsoft.PowerShell.Commands.SendMailMessage
+ 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
