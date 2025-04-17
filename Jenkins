@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Create Local User') {
+            steps {
+                bat 'powershell -ExecutionPolicy Bypass -File C:\\WinAdminAuto\\CreateUser.ps1'
+            }
+        }
+
+        stage('Backup Files') {
+            steps {
+                bat 'powershell -ExecutionPolicy Bypass -File C:\\WinAdminAuto\\BackupFiles.ps1'
+            }
+        }
+
+        stage('Schedule Restart') {
+            steps {
+                bat 'powershell -ExecutionPolicy Bypass -File C:\\WinAdminAuto\\ScheduleRestart.ps1'
+            }
+        }
+
+        stage('Send Email Report') {
+            steps {
+                bat 'powershell -ExecutionPolicy Bypass -File C:\\WinAdminAuto\\EmailReport.ps1'
+            }
+        }
+    }
+}
